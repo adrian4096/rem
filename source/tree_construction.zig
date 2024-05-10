@@ -1009,7 +1009,7 @@ fn inBody(c: *TreeConstructor, token: Token) !void {
                 .html_a => {
                     const begin = if (c.index_of_last_marker) |lm| lm + 1 else 0;
                     for (c.active_formatting_elements.items[begin..]) |fe| {
-                        if (fe.element.?.element_type == .html_a) {
+                        if ((fe.element orelse return error.NoElement).element_type == .html_a) {
                             try parseError(c, .TreeConstructionError);
                             try adoptionAgencyAlgorithm(c, .html_a);
                             for (c.active_formatting_elements.items, 0..) |fe2, j| {

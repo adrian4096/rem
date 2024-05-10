@@ -267,6 +267,7 @@ pub fn run(self: *Self) !void {
                     error.CodepointTooLarge,
                     => @panic("TODO Handle errors in parsing"),
                     error.DomException => @panic("TODO Handle DOM Exceptions"),
+                    error.NoElement => |e| return e,
                 };
                 assert(constructor_result.new_tokenizer_state == null or i == tokens.len - 1);
             }
